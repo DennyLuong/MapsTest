@@ -37,6 +37,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String phoneNo = "8326606067";
     String message = "Test Message";
 
+    double latVal = 29.72186;
+    double longVal = -95.34011;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void updateUserLocation(GoogleMap mMap) {
-        LatLng mvmtTracker = new LatLng(29.72186, -95.34011);
+        LatLng mvmtTracker = new LatLng(latVal, longVal);
         mMap.addMarker(new MarkerOptions().position(mvmtTracker).title("TimeStamp: HH:MM"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(mvmtTracker));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f));
