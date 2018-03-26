@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context="com.example.denny.mapstest.MainActivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,21 +22,90 @@
         android:layout_alignParentRight="true"
         />
 
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:id = "@+id/googsMaps"
-        android:text="Launch Google Maps"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        />
-
+    <ScrollView
+        android:id="@+id/SCROLLER_ID"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/value"
+            android:text="|"
+            android:layout_alignParentBottom="true"
+            />
+    </ScrollView>
     <Button
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:id = "@+id/mapview"
         android:text="View Realtime Map"
-        android:layout_above="@id/googsMaps"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Begin"-->
+        <!--android:id="@+id/connectBT"-->
+        <!--android:layout_below="@+id/editText"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:onClick="onClickStart"/>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Send"-->
+        <!--android:id="@+id/buttonSend"-->
+        <!--android:onClick="onClickSend"-->
+        <!--android:layout_below="@+id/editText"-->
+        <!--android:layout_toRightOf="@+id/connectBT"-->
+        <!--android:layout_toEndOf="@+id/connectBT" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_below="@+id/buttonSend"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignRight="@+id/editText"-->
+        <!--android:layout_alignEnd="@+id/editText"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:singleLine="true" />-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Stop"-->
+        <!--android:id="@+id/buttonStop"-->
+        <!--android:layout_below="@+id/editText"-->
+        <!--android:layout_toRightOf="@+id/buttonSend"-->
+        <!--android:layout_toEndOf="@+id/buttonSend"-->
+        <!--android:onClick="onClickStop"/>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Clear"-->
+        <!--android:id="@+id/buttonClear"-->
+        <!--android:layout_below="@+id/editText"-->
+        <!--android:layout_toRightOf="@+id/buttonStop"-->
+        <!--android:layout_toEndOf="@+id/buttonStop"-->
+        <!--android:onClick="onClickClear"/>-->
 </RelativeLayout>
+
