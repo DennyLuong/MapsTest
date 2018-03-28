@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     int bufferPosition;
     boolean stopThread;
 
+    double latVal = 29.72186;
+    double longVal = -95.34011;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -236,7 +239,8 @@ public class MainActivity extends AppCompatActivity {
     private void openMapViewerActivity() {
         Intent myIntent = new Intent(this, MapsActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("locationStr", locStr);
+        bundle.putDouble("latSample", latVal);
+        bundle.putDouble("longSample", longVal);
         myIntent.putExtras(bundle);
         startActivity(myIntent);
     }
