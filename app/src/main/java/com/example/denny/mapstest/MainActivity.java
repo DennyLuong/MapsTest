@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     //UUID is General Usage. *I think*
     private final UUID PORT_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");//Serial Port Service ID
 
+    private String locStr;
+
     private BluetoothDevice device;
     private BluetoothSocket socket;
     private OutputStream outputStream;
@@ -184,11 +186,11 @@ public class MainActivity extends AppCompatActivity {
                         {
                             byte[] rawBytes = new byte[byteCount];
                             inputStream.read(rawBytes);
-                            final String string=new String(rawBytes,"UTF-8");
+                            locStr=new String(rawBytes,"UTF-8");
                             handler.post(new Runnable() {
                                 public void run()
                                 {
-                                    textView.append(string);
+                                    textView.append(locStr);
                                 }
                             });
 
@@ -232,7 +234,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openMapViewerActivity() {
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
+        Intent myIntent = new Intent(this, MapsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("locationStr", locStr);
+        myIntent.putExtras(bundle);
+        startActivity(myIntent);
     }
 }

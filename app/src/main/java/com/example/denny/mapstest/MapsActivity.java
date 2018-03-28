@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,23 +29,27 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.w3c.dom.Text;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
     private FloatingActionButton iamthefab;
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
     String phoneNo = "8326606067";
     String message = "Test Message";
 
     double latVal = 29.72186;
     double longVal = -95.34011;
 
+    TextView mapsTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
+        mapsTV = (TextView) findViewById(R.id.mapsTextView);
         final Context context = getApplicationContext();
         final int duration = Toast.LENGTH_SHORT;
         final Toast toast = Toast.makeText(context, "", duration);
@@ -63,7 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View view){
                 Toast.makeText(context, "i am fab", Toast.LENGTH_LONG).show();
                 updateUserLocation(mMap);
-//                sendSMSMessage();
+                sendSMSMessage();
             };
         });
 
@@ -104,7 +109,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (grant != PackageManager.PERMISSION_GRANTED) {
             String[] permission_list = new String[1];
             permission_list[0] = permission;
-            ActivityCompat.requestPermissions(this, permission_list, 1);
+//            ActivityCompat.requestPermissions(this, permission_list, 1);
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
         }
     }
 
