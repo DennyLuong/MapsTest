@@ -8,20 +8,6 @@
     android:padding="16dp"
     tools:context="com.example.denny.mapstest.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latitude"
-        android:layout_alignParentLeft="true"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Longitude"
-        android:layout_alignParentRight="true"
-        />
-
     <ScrollView
         android:id="@+id/SCROLLER_ID"
         android:layout_width="fill_parent"
@@ -33,9 +19,18 @@
             android:layout_height="wrap_content"
             android:id="@+id/value"
             android:text="|"
+            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             />
+
     </ScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/value2"
+        android:text="Text"
+        android:layout_centerHorizontal="true"
+        />
     <Button
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -45,46 +40,22 @@
         android:layout_centerHorizontal="true"
         />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Begin"
         android:id="@+id/connectBT"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:onClick="onClickStart"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send"
-        android:id="@+id/buttonSend"
-        android:onClick="onClickSend"
-        android:layout_below="@+id/editText"
-        android:layout_toRightOf="@+id/connectBT"
-        android:layout_toEndOf="@+id/connectBT" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
-        android:layout_below="@+id/buttonSend"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
         android:layout_alignParentBottom="true"
         android:singleLine="true" />
 
@@ -92,10 +63,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Stop"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:id="@+id/buttonStop"
-        android:layout_below="@+id/editText"
-        android:layout_toRightOf="@+id/buttonSend"
-        android:layout_toEndOf="@+id/buttonSend"
+        android:layout_below="@+id/connectBT"
         android:onClick="onClickStop"/>
 
     <Button
@@ -103,9 +75,9 @@
         android:layout_height="wrap_content"
         android:text="Clear"
         android:id="@+id/buttonClear"
-        android:layout_below="@+id/editText"
-        android:layout_toRightOf="@+id/buttonStop"
-        android:layout_toEndOf="@+id/buttonStop"
-        android:onClick="onClickClear"/>
+        android:layout_below="@+id/buttonStop"
+        android:onClick="onClickClear"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>
 

@@ -43,13 +43,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double latVal;
     double longVal;
 
-    TextView mapsTV;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        mapsTV = (TextView) findViewById(R.id.mapsTextView);
         final Context context = getApplicationContext();
         final int duration = Toast.LENGTH_SHORT;
         final Toast toast = Toast.makeText(context, "", duration);
@@ -83,7 +80,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 
@@ -95,15 +91,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void updateUserLocation(GoogleMap mMap) {
         Double sLat = getIntent().getDoubleExtra("latSample", latVal);
-        Double sLong = getIntent().getDoubleExtra("longSample", latVal);
+        Double sLong = getIntent().getDoubleExtra("longSample", longVal);
         LatLng mvmtTracker = new LatLng(sLat, sLong);
         mMap.addMarker(new MarkerOptions().position(mvmtTracker).title("Test"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(mvmtTracker));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f));
     }
-
-    //TODO have options for updating the shoe location
-    //and have another option to send a text message to check where they are.
 
     private void requestSmsPermission() {
         String permission = Manifest.permission.READ_SMS;
@@ -111,7 +104,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (grant != PackageManager.PERMISSION_GRANTED) {
             String[] permission_list = new String[1];
             permission_list[0] = permission;
-//            ActivityCompat.requestPermissions(this, permission_list, 1);
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
         }
     }

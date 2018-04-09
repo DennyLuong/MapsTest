@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private OutputStream outputStream;
     private InputStream inputStream;
 
-    Button startButton, sendButton, stopButton, clearButton;
+    Button startButton, stopButton, clearButton;
     TextView textView;
     EditText editText;
     Button mapViewer;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     boolean stopThread;
 
     double latVal = 29.72186;
-    double longVal = -95.34011;
+    double longVal = -94.34011;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.value);
         stopButton = (Button) findViewById(R.id.buttonStop);
         clearButton = (Button) findViewById(R.id.buttonClear);
-        sendButton = (Button) findViewById(R.id.buttonSend);
 //        setUiEnabled(false);
 
         mapViewer.setOnClickListener(new View.OnClickListener(){
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
     public void setUiEnabled(boolean bool)
     {
         startButton.setEnabled(!bool);
-        sendButton.setEnabled(bool);
         stopButton.setEnabled(bool);
         textView.setEnabled(bool);
     }
@@ -209,18 +207,6 @@ public class MainActivity extends AppCompatActivity {
 
         thread.start();
     }
-
-    public void onClickSend(View view) {
-        String string = editText.getText().toString();
-        string.concat("\n");
-        try {
-            outputStream.write(string.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        textView.append("\nSent Data:"+string+"\n");
-    }
-
 
     public void onClickStop(View view) throws IOException {
         stopThread = true;
