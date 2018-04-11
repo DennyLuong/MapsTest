@@ -15,6 +15,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +31,6 @@ import java.io.OutputStream;
 import java.util.Set;
 import java.util.UUID;
 
-
 public class MainActivity extends AppCompatActivity {
 
     //TODO Change Device Address and UUID
@@ -37,12 +38,13 @@ public class MainActivity extends AppCompatActivity {
     //UUID is General Usage. *I think*
     private final UUID PORT_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");//Serial Port Service ID
 
-    private String locStr;
-
+    String locStr;
+    String strA;
     private BluetoothDevice device;
     private BluetoothSocket socket;
     private OutputStream outputStream;
     private InputStream inputStream;
+    int counter = 0;
 
     Button startButton, stopButton, clearButton;
     TextView textView;
@@ -72,11 +74,9 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.value);
         stopButton = (Button) findViewById(R.id.buttonStop);
         clearButton = (Button) findViewById(R.id.buttonClear);
-//        setUiEnabled(false);
 
         mapViewer.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-//                toast.show();
                 Toast.makeText(context, "Opening Map Viewer Screen", duration).show();
                 openMapViewerActivity();
             }
@@ -149,9 +149,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
-
         return connected;
     }
 
@@ -165,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
                 beginListenForData();
                 textView.append("\nConnection Opened!\n");
             }
-
         }
     }
 
@@ -182,24 +179,37 @@ public class MainActivity extends AppCompatActivity {
                 {
                     try
                     {
+                        Thread.sleep(100);
                         int byteCount = inputStream.available();
                         if(byteCount > 0)
                         {
                             byte[] rawBytes = new byte[byteCount];
+                            final TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter('|');
                             inputStream.read(rawBytes);
                             locStr=new String(rawBytes,"UTF-8");
+                            Log.i("locStr", locStr);
                             handler.post(new Runnable() {
                                 public void run()
                                 {
-                                    textView.append(locStr);
+//                                    strA = String.format("str: %s", locStr);
+
+                                    splitter.setString(locStr);
+                                    for (String s : splitter) {
+                                        Log.i("locStr", s);
+                                        textView.append(counter + "s: ");
+                                        textView.append(s);
+                                        counter++;
+                                    }
+//                                    textView.append(strA);
                                 }
                             });
-
                         }
                     }
                     catch (IOException ex)
                     {
                         stopThread = true;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }
