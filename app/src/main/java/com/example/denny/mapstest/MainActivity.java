@@ -38,13 +38,14 @@ public class MainActivity extends AppCompatActivity {
     //UUID is General Usage. *I think*
     private final UUID PORT_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");//Serial Port Service ID
 
+
     String locStr;
-    String strA;
     private BluetoothDevice device;
     private BluetoothSocket socket;
     private OutputStream outputStream;
     private InputStream inputStream;
-    int counter = 0;
+
+    String pLat, pLong;
 
     Button startButton, stopButton, clearButton;
     TextView textView;
@@ -187,20 +188,28 @@ public class MainActivity extends AppCompatActivity {
                             final TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter('|');
                             inputStream.read(rawBytes);
                             locStr=new String(rawBytes,"UTF-8");
-                            Log.i("locStr", locStr);
                             handler.post(new Runnable() {
                                 public void run()
                                 {
-//                                    strA = String.format("str: %s", locStr);
-
                                     splitter.setString(locStr);
+//                                    textView.append(locStr);
                                     for (String s : splitter) {
-                                        Log.i("locStr", s);
-                                        textView.append(counter + "s: ");
-                                        textView.append(s);
-                                        counter++;
+                                        if(s.length() == 8) {
+                                            pLat = s;
+                                            textView.append("\npLat\n");
+                                        }
+                                        else if (s.length() >= 9){
+                                            pLong = s;
+                                            textView.append("\npLong\n");
+                                        }
+                                        else {
+                                            textView.append("\nSkip\n");
+                                        }
                                     }
-//                                    textView.append(strA);
+                                    textView.append("\n  loc: " + pLat + "\t" + pLong);
+                                    latVal = Double.parseDouble(pLat);
+                                    longVal = Double.parseDouble(pLong);
+                                    textView.append("\n  loc: " + latVal + "\t" + longVal + "\n");
                                 }
                             });
                         }
@@ -233,8 +242,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openMapViewerActivity() {
-        Intent myIntent = new Intent(this, MapsActivity.class);
         Bundle bundle = new Bundle();
+        Intent myIntent = new Intent(this, MapsActivity.class);
         bundle.putDouble("latSample", latVal);
         bundle.putDouble("longSample", longVal);
         myIntent.putExtras(bundle);
